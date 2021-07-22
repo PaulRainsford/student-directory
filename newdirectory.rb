@@ -24,13 +24,15 @@ def print_header
 end
 
 def print(students)
-  students.each_with_index do |student, index|
-    if student[:name].length < 12
-    oneindex = index +1
-    puts "#{oneindex} #{student[:name]} (#{student[:cohort]} cohort)"
-    end
+  count = 0
+  while count < students.count
+    puts "#{count+1}. {students[count][:name]} (#{students[count][:cohort]} cohort)"
+    count += 1
   end
 end
+  
+
+  
 
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
