@@ -29,13 +29,13 @@ end
 
 
 def print_header
-  puts "The Students of Villains Academy"
-  puts "-----------"
+  puts "The Students of Villains Academy".center(80)
+  puts "-----------".center(80)
 end
 
 def print(students)
   students.each do |student|
-    puts "#{student[:name]} #{student[:birth]} #{student[:team]} (#{student[:cohort]} cohort)"
+    puts "#{student[:name]} #{student[:birth]} #{student[:team]} (#{student[:cohort]} cohort)".center(80)
   end
 end
   
