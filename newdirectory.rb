@@ -4,29 +4,29 @@ def input_students
   # create an empty array
   students = []
   # get the first name
-  name = gets.chomp
+  name = gets.rstrip
   puts "Which cohort does the student belong to?"
-  cohort = gets.chomp
+  cohort = gets.rstrip
   # while the name and cohort are not empty, repeat this code
   while !name.empty? || !cohort.empty? do
     name = "A.N.Other" if name.empty?
     cohort = "november" if cohort.empty?
     confirm_info(name, cohort)
-    com_inf = gets.chomp
+    com_inf = gets.rstrip
   while com_inf != "1"
-    name = gets.chomp
-    cohort = gets.chomp
+    name = gets.rstrip
+    cohort = gets.rstrip
     name = "A.N Other" if name.empty?
     cohort = "november" if cohort.empty?
     confirm_info(name, cohort)
-    com_inf = gets.chomp
+    com_inf = gets.rstrip
   end
       students << {name: name, cohort: cohort.to_sym}
     puts "Now we have #{students.count} student#{"s" if students.size !=1}, please enter another name or press Enter twice to end"
-    # get another name from the user
-    name = gets.chomp
+    # get another name = g from the user
+    name = gets.rstrip
     puts "Please enter the cohort for this student"
-    cohort = gets.chomp
+    cohort = gets.rstrip
   end
   # return the array of students
   students
