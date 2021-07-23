@@ -5,26 +5,36 @@ def input_students
   students = []
   # get the first name
   name = gets.chomp
-  puts "What is this student's country of birth?"
-  birth = gets.chomp
-  puts "What is the student's favourite football team?"
-  team = gets.chomp
-  # while the name is not empty, repeat this code
-  while !name.empty? do
-    # add the student hash to the array
-    students << {name: name, birth: birth, team: team, cohort: :november}
-    puts "Now we have #{students.count} students"
+  puts "Which cohort does the student belong to?"
+  cohort = gets.chomp
+  # while the name and cohort are not empty, repeat this code
+  while !name.empty? || !cohort.empty? do
+    name = "A.N.Other" if name.empty?
+    cohort = "november" if cohort.empty?
+    confirm_info(name, cohort)
+    com_inf = gets.chomp
+  while com_inf != "1"
+    name = gets.chomp
+    cohort = gets.chomp
+    name = "A.N Other" if name.empty?
+    cohort = "november" if cohort.empty?
+    confirm_info(name, cohort)
+    com_inf = gets.chomp
+  end
+      students << {name: name, cohort: cohort.to_sym}
+    puts "Now we have #{students.count} student(s), please enter another name or press Enter twice to end"
     # get another name from the user
     name = gets.chomp
-    if !name.empty?
-      puts "What is this student's country of birth?"
-      birth = gets.chomp
-      puts "What is the student's favourite football team?"
-      team = gets.chomp 
-    end
+    puts "Please enter the cohort for this student"
+    cohort = gets.chomp
   end
   # return the array of students
   students
+end
+
+def confirm_info(name, cohort)
+  puts "Name: [#{name}], Cohort: [#{cohort}]"
+  puts "Yes => 1, No => 2"
 end
 
 
@@ -34,9 +44,19 @@ def print_header
 end
 
 def print(students)
-  students.each do |student|
-    puts "#{student[:name]} #{student[:birth]} #{student[:team]} (#{student[:cohort]} cohort)".center(80)
-  end
+  #count = 0
+  #while count < students.count
+  #  student_info = "#{count+1}. #{students[count][:name]} (#{students[count][:cohort]} cohort)"
+  #  puts student_info.center(student_info.length + 10)
+  #  count += 1
+ # end
+#end
+cohort_group = students.map{|student| student[:cohort]}.uniq
+cohort_group.each do |group|
+  puts "[The #{group} cohort]:"
+  puts students.map{|student| student[:name] if student[:cohort] == group }.compact
+  puts ""
+end
 end
   
 
