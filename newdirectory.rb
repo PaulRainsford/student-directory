@@ -22,7 +22,7 @@ def input_students
     com_inf = gets.chomp
   end
       students << {name: name, cohort: cohort.to_sym}
-    puts "Now we have #{students.count} student(s), please enter another name or press Enter twice to end"
+    puts "Now we have #{students.count} student#{"s" if students.size !=1}, please enter another name or press Enter twice to end"
     # get another name from the user
     name = gets.chomp
     puts "Please enter the cohort for this student"
@@ -63,7 +63,7 @@ end
   
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
+  puts "Now we have #{students.count} student#{"s" if students.size !=1}"
 end
 
 #nothing happens until we call the methods
