@@ -5,8 +5,7 @@ def input_students
   students = []
   # get the first name
   name = gets.rstrip
-  puts "Which cohort does the student belong to?"
-  cohort = gets.rstrip
+    cohort = gets.rstrip
   # while the name and cohort are not empty, repeat this code
   while !name.empty? || !cohort.empty? do
     name = "A.N.Other" if name.empty?
@@ -38,10 +37,10 @@ def confirm_info(name, cohort)
 end
 
 
-def print_header
-  puts "The Students of Villains Academy".center(80)
-  puts "-----------".center(80)
-end
+#def print_header
+ # puts "The Students of Villains Academy".center(80)
+  #puts "-----------".center(80)
+#end
 
 def print(students)
   #count = 0
@@ -49,25 +48,32 @@ def print(students)
   #  student_info = "#{count+1}. #{students[count][:name]} (#{students[count][:cohort]} cohort)"
   #  puts student_info.center(student_info.length + 10)
   #  count += 1
- # end
+  # end
+  #end
+  if students.count != 0
+    puts "The Students of Villains Academy".center(80)
+    puts "-----------".center(80)
+    cohort_group = students.map{|student| student[:cohort]}.uniq
+    cohort_group.each do |group|
+      puts "[The #{group} cohort]:"
+      puts students.map{|student| student[:name] if student[:cohort] == group }.compact
+      puts ""
+    end
+    puts "Now we have #{students.count} student#{"s" if students.size !=1}"
+  else 
+    puts "Please enter the name of the student"
+  end
+end
+  
+
+  
+
+#def print_footer(students)
+  #puts "Now we have #{students.count} student#{"s" if students.size !=1}"
 #end
-cohort_group = students.map{|student| student[:cohort]}.uniq
-cohort_group.each do |group|
-  puts "[The #{group} cohort]:"
-  puts students.map{|student| student[:name] if student[:cohort] == group }.compact
-  puts ""
-end
-end
-  
-
-  
-
-def print_footer(students)
-  puts "Now we have #{students.count} student#{"s" if students.size !=1}"
-end
 
 #nothing happens until we call the methods
 students = input_students
-print_header
+#print_header
 print(students)
-print_footer(students)
+#print_footer(students)
