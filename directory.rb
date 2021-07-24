@@ -4,6 +4,7 @@ def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "3. Save the list to students.csv"
+  puts "4. Load the list from students.csv"
   puts "9. Exit" # 9 because we'll be adding more items
 end
 
@@ -80,7 +81,7 @@ def save_students
 end
 
 def load_students(filename = "students.csv")
-  file = File.open("students.csv", "r")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
     @students << {name: name, cohort: cohort.to_sym}
@@ -100,4 +101,5 @@ def try_load_students
   end
 end
 
+try_load_students
 interactive_menu
