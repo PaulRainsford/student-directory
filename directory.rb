@@ -38,8 +38,9 @@ def process(selection)
 end
 
 def feedback(action)
-  puts "#{action} has completed successfully!"
-  puts " "
+  # puts "#{action} has completed successfully!"
+  # puts " "
+  puts "\n#{action} has completed successfully!\n\n"
 end
 
 def add(name, cohort = "november")
@@ -89,14 +90,21 @@ def save
   # open the file for writing
   puts "Please enter the filename to save:"
   filename = STDIN.gets.chomp
-  file = File.open(filename, "w") # open the file for writing
+  # file = File.open(filename, "w") # open the file for writing
+  File::open(filename, "w"){|file|
   # iterate over the array of students
+ # @students.each do |student|
+  #  student_data = [student[:name], student[:cohort]]
+  #  csv_line = student_data.join(",")
+   # file.puts csv_line
+  # end
+  # file.close
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
     file.puts csv_line
   end
-  file.close
+  }
 end
 
 def load(filename)
@@ -105,13 +113,19 @@ def load(filename)
     filename = STDIN.gets.chomp
     @students = []
   end
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(',')
+  # file = File.open(filename, "r")
+  # file.readlines.each do |line|
+   # name, cohort = line.chomp.split(',')
     # @students << {name: name, cohort: cohort.to_sym}
-    add(name, cohort)
+   # add(name, cohort)
+  # end
+  # file.close
+  file = File.open(filenmae, "r"){|file|
+  file.readlines.each do |line|
+  name, cohort = line.chomp.split(',')
+  add(name, cohort)
   end
-  file.close
+}
 end
 
 def try_load
