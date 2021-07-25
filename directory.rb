@@ -1,3 +1,4 @@
+require 'csv'
 @students = []
 
 def menu
@@ -90,21 +91,24 @@ def save
   # open the file for writing
   puts "Please enter the filename to save:"
   filename = STDIN.gets.chomp
-  # file = File.open(filename, "w") # open the file for writing
-  File::open(filename, "w"){|file|
-  # iterate over the array of students
- # @students.each do |student|
-  #  student_data = [student[:name], student[:cohort]]
-  #  csv_line = student_data.join(",")
+  CSV.open(filename, "wb") do |csv|
+   # file = File.open(filename, "w") # open the file for writing
+   # File::open(filename, "w"){|file|
+   # iterate over the array of students
+   # @students.each do |student|
+   #  student_data = [student[:name], student[:cohort]]
+   #  csv_line = student_data.join(",")
    # file.puts csv_line
-  # end
-  # file.close
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+   # end
+   # file.close
+    @students.each do |student|
+    # student_data = [student[:name], student[:cohort]]
+    # csv_line = student_data.join(",")
+    # file.puts csv_line
+    csv << [student[:name], student[:cohort]]
+    end
   end
-  }
+  # }
 end
 
 def load(filename)
@@ -120,13 +124,18 @@ def load(filename)
    # add(name, cohort)
   # end
   # file.close
-  file = File.open(filenmae, "r"){|file|
-  file.readlines.each do |line|
-  name, cohort = line.chomp.split(',')
-  add(name, cohort)
+  # file = File.open(filenmae, "r"){|file|
+  # file.readlines.each do |line|
+  # name, cohort = line.chomp.split(',')
+  # add(name, cohort)
+  # end
+  # }  
+  CSV.foreach(filename) do |line|
+  name, cohort = line [0], line[1]
+  add(name,cohort)
   end
-}
 end
+
 
 def try_load
   filename = ARGV.first # first argument from the command line
